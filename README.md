@@ -24,7 +24,7 @@ This repository contains the backend codebase for ToyTroopHub, an online toy sto
 - **Git**: Version control system for collaboration and code management.
 
 ## Getting Started
-1. Clone this repository: `git clone <repository_url>`
+1. Clone this repository: `git clone [[<repository_url>]`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Configure database settings in `settings.py`.
 4. Apply migrations: `python manage.py migrate`
