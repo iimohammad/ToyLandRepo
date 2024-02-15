@@ -20,7 +20,6 @@ This repository contains the backend codebase for ToyTroopHub, an online toy sto
 - **PostgreSQL**: Robust open-source relational database.
 - **HTML/CSS/JavaScript**: Frontend technologies for building interactive user interfaces.
 - **Docker**: Containerization for consistent development and deployment environment.
-- **AWS**: Cloud services for hosting, storage, and content delivery.
 - **Git**: Version control system for collaboration and code management.
 
 ## Getting Started
