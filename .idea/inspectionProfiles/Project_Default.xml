@@ -22,6 +22,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="None" />
+          <option value="toyland.local_settings" />
         </list>
       </option>
     </inspection_tool>
