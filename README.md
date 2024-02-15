@@ -39,10 +39,10 @@ This repository contains the backend codebase for ToyTroopHub, an online toy sto
 - Submit a pull request.
 
 ## Maintainer
-- **Name**: [Your Name]
-- **Email**: [Your Email]
-- **GitHub**: [Your GitHub Profile]
+- **Name**: Mohammad Baharlou
+- **Email**: mohammadbaharloo96@gmail.com
+- **GitHub**: www.github.com/iimohammad
 
-For any inquiries or support, please contact [Your Email].
+For any inquiries or support, please contact me.
 
 Happy coding and happy shopping!
