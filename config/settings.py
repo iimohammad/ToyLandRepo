@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'user_panel',
     # 'finance',
     # 'purchase',
-    # 'store',
+    'store',
 ]
 
 MIDDLEWARE = [

@@ -16,22 +16,24 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     search_fields = ('title', 'content')
 
-    def perform_create(self, serializer):
+    def perform_create_or_update(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def perform_create(self, serializer):
+        self.perform_create_or_update(serializer)
+
     def perform_update(self, serializer):
-        serializer.save(owner=self.request.user)
+        self.perform_create_or_update(serializer)
 
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializers
-    queryset = Comment.objects.filter(is_active=True).order_by('-pk')
     permission_classes = [permissions.IsAuthenticated]
     search_fields = ('post',)
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+    def get_queryset(self):
+        return Comment.objects.filter(is_active=True, author=self.request.user).order_by('-pk')
 
-    def perform_update(self, serializer):
+    def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
 class ImageViewSet(viewsets.ModelViewSet):

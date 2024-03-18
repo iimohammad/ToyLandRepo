@@ -11,7 +11,7 @@ urlpatterns = [
     path('blog/', include('blog.urls'), name='blog'),
     # path('finance/', include('blog.urls'), name='blog'),
     # path('purchase/', include('blog.urls'), name='blog'),
-    # path('store/', include('blog.urls'), name='blog'),
+    path('store/', include('blog.urls'), name='blog'),
 
     # Authentication URLS
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
