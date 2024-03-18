@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     # Project Apps
     'blog',
     'user_panel',
-    # 'finance',
+    'finance',
     # 'purchase',
     'store',
 ]
