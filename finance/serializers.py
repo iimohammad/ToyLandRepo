@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import PurchaseOrder, PurchaseOrderItem
-from store.serializers import ProductSerializer
-from user_panel.serializers import CustomUserSerializer
+from store.serializers import *
+from user_panel.serializers import UserSerializer
 
 class PurchaseOrderItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,7 +10,7 @@ class PurchaseOrderItemSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 class PurchaseOrderSerializer(serializers.ModelSerializer):
-    creator = CustomUserSerializer(read_only=True)
+    creator = UserSerializer(read_only=True)
     items = PurchaseOrderItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 

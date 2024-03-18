@@ -9,9 +9,9 @@ urlpatterns = [
     # App URLS
     path('user_panel/', include('user_panel.urls'), name='blog'),
     path('blog/', include('blog.urls'), name='blog'),
-    path('finance/', include('blog.urls'), name='blog'),
-    # path('purchase/', include('blog.urls'), name='blog'),
-    path('store/', include('blog.urls'), name='blog'),
+    path('finance/', include('finance.urls'), name='finance'),
+    path('purchase/', include('purchase.urls'), name='purchase'),
+    path('store/', include('store.urls'), name='store'),
 
     # Authentication URLS
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

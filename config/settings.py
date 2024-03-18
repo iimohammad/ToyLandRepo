@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'blog',
     'user_panel',
     'finance',
-    # 'purchase',
+    'purchase',
     'store',
 ]
 
