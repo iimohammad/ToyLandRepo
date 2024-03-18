@@ -1,20 +1,52 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-class Gallery(models.Model):
-    title = models.CharField(max_length=200)
+    def __str__(self):
+        return self.title
 
-class ImageVideo(models.Model):
-    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
-    file = models.ImageField(upload_to='images/')  
+
+class Image(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    caption = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.caption
+
+
+class Video(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    caption = models.CharField(max_length=200)
+    video = models.FileField(upload_to='video/')
+
+    def __str__(self):
+        return self.caption
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.content

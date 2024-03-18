@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from config import local_settings
-
+from .local_settings import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2l%kvk+4uh3b0*68ki=e*fxc^)=wx38!f-tk47wjz=gx8h1od9'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,12 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Trusted Apps
     'rest_framework',
+    'django_filters',
+    'rest_framework_simplejwt',
 
     # Project Apps
     'blog',
-    'payment',
-    'purchase',
-    'store',
+    'user_panel',
+    # 'finance',
+    # 'purchase',
+    # 'store',
 ]
 
 MIDDLEWARE = [
@@ -79,23 +82,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': local_settings.DATABASE['name'],
-        'HOST': local_settings.DATABASE['host'],
-        'USER': local_settings.DATABASE['user'],
-        'PASSWORD': local_settings.DATABASE['password'],
-        'PORT': local_settings.DATABASE['port'],
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -135,3 +128,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication')
+}
+
+AUTH_USER_MODEL = 'user_panel.CustomUser'
+LOGIN_URL = '/api-auth/login/'
+LOGIN_REDIRECT_URL = 'user_panel/profile/'
