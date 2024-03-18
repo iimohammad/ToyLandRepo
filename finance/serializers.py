@@ -3,11 +3,13 @@ from .models import PurchaseOrder, PurchaseOrderItem
 from store.serializers import *
 from user_panel.serializers import UserSerializer
 
+
 class PurchaseOrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = PurchaseOrderItem
         fields = ['id', 'order', 'product', 'quantity', 'price']
         read_only_fields = ['id']
+
 
 class PurchaseOrderSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)

@@ -1,6 +1,7 @@
 from django.db import models
 from user_panel.models import CustomUser
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()

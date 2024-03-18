@@ -25,6 +25,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         self.perform_create_or_update(serializer)
 
+
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializers
     permission_classes = [permissions.IsAuthenticated]
@@ -36,11 +37,13 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializers
     permission_classes = [permissions.IsAuthenticated]
     search_fields = ('caption',)
+
 
 class VideoViewSet(viewsets.ModelViewSet):
     queryset = Video.objects.all()

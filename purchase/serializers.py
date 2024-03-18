@@ -3,6 +3,7 @@ from store.models import Product
 from user_panel.models import CustomUser
 from .models import wallet, Cart, CartItem
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
 
@@ -10,10 +11,12 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = wallet
         fields = ['id', 'user', 'name', 'balance', 'created_at']
 
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'name', 'price']
+
 
 class CartItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
@@ -21,6 +24,7 @@ class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ['id', 'product', 'quantity']
+
 
 class CartSerializer(serializers.ModelSerializer):
     profile = serializers.PrimaryKeyRelatedField(read_only=True)

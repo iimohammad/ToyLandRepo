@@ -1,5 +1,5 @@
 from rest_framework import viewsets, permissions
-from .serializers import ProductSerialziers, CategorySerialziers, CommentSerialziers, VideoSerialziers, ImageSerialziers
+from .serializers import ProductSerialziers, CategorySerializers, CommentSerializers, VideoSerialziers, ImageSerialziers
 from .models import Product, Category, Comment, Video, Image
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -10,13 +10,13 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
-    serializer_class = CategorySerialziers
+    serializer_class = CategorySerializers
     permission_classes = [permissions.IsAdminUser]
     search_fields = ('name', 'description')
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.filter(is_active=True).order_by('-pk')
-    serializer_class = CommentSerialziers
+    serializer_class = CommentSerializers
     permission_classes = [permissions.IsAdminUser]
     search_fields = ('text',)
 
