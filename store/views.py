@@ -1,6 +1,6 @@
 from rest_framework import viewsets, permissions
-from .serializers import ProductSerialziers, CategorySerializers, CommentSerializers, VideoSerialziers, ImageSerialziers
-from .models import Product, Category, Comment, Video, Image
+from .serializers import ProductSerialziers, CategorySerializers, CommentSerializers, MediaSerialziers
+from .models import Product, Category, Comment, Media
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
@@ -23,13 +23,8 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-class VideoViewSet(viewsets.ModelViewSet):
-    queryset = Video.objects.all()
-    serializer_class = VideoSerialziers
+class MediaViewSet(viewsets.ModelViewSet):
+    queryset = Media.objects.all()
+    serializer_class = MediaSerialziers
     permission_classes = [permissions.IsAdminUser]
-    
 
-class ImageViewSet(viewsets.ModelViewSet):
-    queryset = Image.objects.all()
-    serializer_class = ImageSerialziers
-    permission_classes = [permissions.IsAdminUser]

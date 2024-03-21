@@ -14,7 +14,7 @@ class walletAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = ['id', 'profile', 'created_at']
+    list_display = ['id', 'created_at']
     inlines = [CartItemInline]
 
 

@@ -1,7 +1,7 @@
 from django.db import models
 from store.models import Product
 from user_panel.models import CustomUser
-
+from uuid import uuid4
 
 class wallet(models.Model):
     owner = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
@@ -25,7 +25,8 @@ class wallet(models.Model):
 
 
 class Cart(models.Model):
-    profile = models.OneToOneField(wallet, on_delete=models.CASCADE)
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    # profile = models.OneToOneField(wallet, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def total_price(self):

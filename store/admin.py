@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Comment, Video, Image
+from .models import Product, Category, Comment, Media
 
 
 @admin.register(Product)
@@ -21,18 +21,12 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['is_active']
 
 
-@admin.register(Video)
-class VideoAdmin(admin.ModelAdmin):
-    list_display = ['id', 'caption', 'get_post']
+@admin.register(Media)
+class MediaAdmin(admin.ModelAdmin):
+    list_display = ['id', 'product', 'caption', 'get_post']
     search_fields = ['caption']
 
     def get_post(self, obj):
         return obj.post
 
     get_post.short_description = 'Post'
-
-
-@admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
-    list_display = ['id', 'caption', 'product']
-    search_fields = ['caption']

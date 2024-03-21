@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = wallet
-        fields = ['id', 'user', 'name', 'balance', 'created_at']
+        fields = ['id', 'user', 'balance', 'created_at']
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class CartItemSerializer(serializers.ModelSerializer):
 
 
 class CartSerializer(serializers.ModelSerializer):
-    profile = serializers.PrimaryKeyRelatedField(read_only=True)
+    # profile = serializers.PrimaryKeyRelatedField(read_only=True)
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 
@@ -36,4 +36,4 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ['id', 'profile', 'items', 'total_price']
+        fields = ['items', 'total_price']

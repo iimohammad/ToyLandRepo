@@ -31,18 +31,9 @@ class Comment(models.Model):
         return self.text
 
 
-class Video(models.Model):
+class Media(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='videos')
-    video = models.FileField(upload_to='products/videos/')
-    caption = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.caption
-
-
-class Image(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')  # Added related_name
-    image = models.ImageField(upload_to='products/images/')
+    media = models.FileField(upload_to='products/media/')
     caption = models.CharField(max_length=100)
 
     def __str__(self):
