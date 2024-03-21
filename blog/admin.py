@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Post, Comment, Image, Video
+from .models import Category, Post, Comment, Media
 
 
 @admin.register(Category)
@@ -21,13 +21,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['is_active']
 
 
-@admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
+@admin.register(Media)
+class FileAdmin(admin.ModelAdmin):
     list_display = ['id', 'caption', 'post']
-    search_fields = ['caption']
-
-
-@admin.register(Video)
-class VideoAdmin(admin.ModelAdmin):
-    list_display = ['caption', 'post']
     search_fields = ['caption']

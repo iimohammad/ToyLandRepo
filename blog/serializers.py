@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Comment, Category, Image, Video
+from .models import Post, Comment, Category, Media
 
 
 class CategorySerialziers(serializers.ModelSerializer):
@@ -20,13 +20,7 @@ class CommentSerializers(serializers.ModelSerializer):
         fields = ['id', 'post', 'content', 'author']
 
 
-class ImageSerializers(serializers.ModelSerializer):
+class MediaSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Image
-        fields = ['id', 'post', 'caption', 'image']
-
-
-class VideoSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Video
-        fields = ['id', 'post', 'caption', 'video']
+        model = Media
+        fields = ['id', 'post', 'caption', 'media']

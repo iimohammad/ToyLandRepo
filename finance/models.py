@@ -21,7 +21,7 @@ class PurchaseOrder(models.Model):
 class PurchaseOrderItem(models.Model):
     order = models.ForeignKey(PurchaseOrder, on_delete=models.PROTECT, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='purchase_order_items')
-    quantity = models.PositiveSmallIntegerField()
+    quantity = models.PositiveSmallIntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
