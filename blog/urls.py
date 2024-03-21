@@ -6,7 +6,7 @@ router = DefaultRouter()
 
 router.register('category', CategoryViewSet, basename='category') 
 router.register('Post',PostViewSet,basename='Post')
-router.register('Comment',CommentViewSet,basename='Comment')
+router.register('CommentBlog',CommentViewSet,basename='Comment1')
 router.register('Media',MediaViewSet,basename='Media')
 
 urlpatterns = [
