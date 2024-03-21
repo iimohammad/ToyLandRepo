@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+from user_panel.serializers import CustomUserSerializer
 from store.models import Category, Comment, Product, Media
 
 
@@ -10,9 +10,17 @@ class CategorySerializers(serializers.ModelSerializer):
 
 
 class CommentSerializers(serializers.ModelSerializer):
+    author = CustomUserSerializer(read_only=True)
     class Meta:
         model = Comment
         fields = ('id', 'product', 'text', 'author')
+
+
+class AdminCommentSerializers(serializers.ModelSerializer):
+    author = CustomUserSerializer(read_only=True)
+    class Meta:
+        model = Comment
+        fields = ('id', 'product', 'text', 'author', 'is_active')
 
 
 class MediaSerialziers(serializers.ModelSerializer):

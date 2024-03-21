@@ -1,5 +1,5 @@
 from rest_framework import viewsets, permissions
-from .serializers import ProductSerialziers, CategorySerializers, CommentSerializers, MediaSerialziers
+from .serializers import AdminCommentSerializers, ProductSerialziers, CategorySerializers, CommentSerializers, MediaSerialziers
 from .models import Product, Category, Comment, Media
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -15,10 +15,19 @@ class CategoryViewSet(viewsets.ModelViewSet):
     search_fields = ('name', 'description')
 
 class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.filter(is_active=True).order_by('-pk')
-    serializer_class = CommentSerializers
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     search_fields = ('text',)
+
+    def get_serializer_class(self, *args, **kwargs):
+        if self.request.user.is_staff:
+            return AdminCommentSerializers
+        return CommentSerializers
+    
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Comment.objects.all()
+        return Comment.objects.filter(is_active=True, author=self.request.user).order_by('-pk')
+
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

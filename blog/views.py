@@ -19,11 +19,17 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    serializer_class = CommentSerializers
     permission_classes = [permissions.IsAuthenticated]
     search_fields = ('post',)
 
+    def get_serializer_class(self, *args, **kwargs):
+        if self.request.user.is_staff:
+            return AdminCommentSerializers
+        return CommentSerializers
+
     def get_queryset(self):
+        if self.request.user.is_staff:
+            return Comment.objects.all()
         return Comment.objects.filter(is_active=True, author=self.request.user).order_by('-pk')
 
     def perform_create(self, serializer):

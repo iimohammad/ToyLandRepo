@@ -23,6 +23,14 @@ class CommentSerializers(serializers.ModelSerializer):
         fields = ['id', 'post', 'content', 'author']
 
 
+class AdminCommentSerializers(serializers.ModelSerializer):
+    author = CustomUserSerializer(read_only=True)
+    class Meta:
+        model = Comment
+        fields = ['id', 'post', 'content', 'author', 'is_active']
+
+
+
 class MediaSerializers(serializers.ModelSerializer):
     class Meta:
         model = Media
