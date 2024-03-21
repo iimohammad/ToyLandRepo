@@ -8,14 +8,15 @@ class PurchaseOrder(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Purchase Order {self.id}"
+        return self.creator.username
 
     def total_price(self):
         total = 0
         for item in self.items.all():
             total += item.quantity * item.price
         return total
-
+    
+    
 
 class PurchaseOrderItem(models.Model):
     order = models.ForeignKey(PurchaseOrder, on_delete=models.PROTECT, related_name='items')
@@ -24,4 +25,4 @@ class PurchaseOrderItem(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"Purchase Order Item {self.id}"
+        return self.product

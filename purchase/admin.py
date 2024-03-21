@@ -4,7 +4,7 @@ from .models import wallet, Cart, CartItem
 
 @admin.register(wallet)
 class walletAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['id', 'owner', 'balance', 'created_at']
 
 
 @admin.register(Cart)

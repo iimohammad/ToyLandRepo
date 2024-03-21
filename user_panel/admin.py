@@ -5,7 +5,7 @@ from .models import CustomUser, Profile
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    list_display = ('username', 'email', 'phone_number', 'is_staff')
+    list_display = ('id', 'username', 'email', 'phone_number', 'is_staff')
     search_fields = ('username', 'email', 'phone_number')
     readonly_fields = ('date_joined', 'last_login')
 
@@ -14,4 +14,6 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = ()
 
 
-
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'description', 'profile_photo']   

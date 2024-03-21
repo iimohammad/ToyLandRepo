@@ -3,7 +3,7 @@ from .models import *
 from rest_framework import viewsets, permissions
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerialziers
     permission_classes = [permissions.IsAuthenticated]
