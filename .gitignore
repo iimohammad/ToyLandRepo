@@ -7,6 +7,7 @@ __pycache__/
 *.so
 products/videos/
 products/images/
+products/media/
 # Distribution / packaging
 .Python
 build/
