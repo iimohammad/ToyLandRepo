@@ -14,4 +14,4 @@ class PurchaseOrderAdmin(admin.ModelAdmin):
 
 @admin.register(PurchaseOrderItem)
 class PurchaseOrderItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'order', 'product', 'quantity', 'price']
+    list_display = ['id', 'order', 'product', 'quantity']

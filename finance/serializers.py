@@ -7,8 +7,8 @@ from user_panel.serializers import UserSerializer
 class PurchaseOrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = PurchaseOrderItem
-        fields = ['id', 'order', 'product', 'quantity', 'price']
-        read_only_fields = ['id']
+        fields = ['id', 'order', 'product', 'quantity']
+        read_only_fields = ['id', 'price']
 
 
 class PurchaseOrderSerializer(serializers.ModelSerializer):
@@ -24,5 +24,5 @@ class PurchaseOrderSerializer(serializers.ModelSerializer):
     def get_total_price(self, obj):
         total = 0
         for item in obj.items.all():
-            total += item.quantity * item.price
+            total += item.quantity * item.product.price
         return total

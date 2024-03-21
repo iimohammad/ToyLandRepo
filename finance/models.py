@@ -4,11 +4,11 @@ from user_panel.models import CustomUser
 
 
 class PurchaseOrder(models.Model):
-    creator = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    creator = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.creator.username
+        return str(self.id)
 
     def total_price(self):
         total = 0
@@ -22,7 +22,6 @@ class PurchaseOrderItem(models.Model):
     order = models.ForeignKey(PurchaseOrder, on_delete=models.PROTECT, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='purchase_order_items')
     quantity = models.PositiveSmallIntegerField(default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.product

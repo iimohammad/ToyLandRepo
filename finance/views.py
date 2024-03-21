@@ -4,13 +4,15 @@ from finance.serializers import PurchaseOrderItemSerializer, PurchaseOrderSerial
 
 
 class PurchaseOrderViewSet(viewsets.ModelViewSet):
-    serializer_class = PurchaseOrderSerializer
     queryset = PurchaseOrder.objects.all()
-    permission_classes = [permissions.IsAdminUser]
-    filter_fields = ('user',)
+    serializer_class = PurchaseOrderSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
 
 
 class PurchaseOrderItemViewSet(viewsets.ModelViewSet):
-    serializer_class = PurchaseOrderItem
+    serializer_class = PurchaseOrderItemSerializer 
     queryset = PurchaseOrderItem.objects.all()
     permission_classes = [permissions.IsAdminUser]
