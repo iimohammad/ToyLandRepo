@@ -2,7 +2,7 @@ from rest_framework import serializers
 from store.models import Product
 from user_panel.models import CustomUser
 from .models import wallet, Cart, CartItem
-
+from user_panel.serializers import CustomUserSerializer
 
 class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
@@ -19,7 +19,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class CartItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)
+    product = ProductSerializer()
 
     class Meta:
         model = CartItem
@@ -27,7 +27,7 @@ class CartItemSerializer(serializers.ModelSerializer):
 
 
 class CartSerializer(serializers.ModelSerializer):
-    # profile = serializers.PrimaryKeyRelatedField(read_only=True)
+    owner = CustomUserSerializer(read_only=True)
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 
@@ -36,4 +36,10 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ['items', 'total_price']
+        fields = ['id', 'items', 'total_price', 'owner']
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        owner = request.user
+        cart = Cart.objects.create(owner=owner, **validated_data)
+        return cart

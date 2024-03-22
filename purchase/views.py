@@ -12,7 +12,7 @@ from rest_framework import mixins, viewsets
 from .models import Cart, CartItem
 from .serializers import CartSerializer, CartItemSerializer
 from user_panel.models import Profile
-
+from rest_framework.permissions import IsAuthenticated
 
 class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
@@ -20,12 +20,16 @@ class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAdminUser]
 
 
-class CartViewSet(mixins.CreateModelMixin,
-                  mixins.RetrieveModelMixin,
-                  mixins.DestroyModelMixin,
-                  viewsets.GenericViewSet):
-    queryset = Cart.objects.order_by('-pk')
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
     serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Cart.objects.all()
+        return Cart.objects.filter(owner=self.request.user)
+    
 
     @action(detail=True, methods=['post'])
     def checkout(self, request, pk=None):
@@ -59,9 +63,7 @@ class CartViewSet(mixins.CreateModelMixin,
             return Response({"error": "Profile not found"}, status=status.HTTP_404_NOT_FOUND)
 
 
-class CartItemViewSet(mixins.CreateModelMixin,
-                      mixins.UpdateModelMixin,
-                      mixins.DestroyModelMixin,
-                      viewsets.GenericViewSet):
+class CartItemViewSet(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
+    permission_classes = [IsAuthenticated]

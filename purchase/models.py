@@ -26,6 +26,7 @@ class wallet(models.Model):
 
 class Cart(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, editable=False)
     # profile = models.OneToOneField(wallet, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -61,7 +62,7 @@ class CartItem(models.Model):
     quantity = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
-        unique_together = [['cart', 'product']]
+         unique_together = [['cart', 'product']]
 
     def update_quantity(self, quantity):
         self.quantity = quantity
