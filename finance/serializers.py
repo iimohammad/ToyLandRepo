@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import PurchaseOrder, PurchaseOrderItem
 from store.serializers import *
-from user_panel.serializers import UserSerializer
+from user_panel.serializers import CustomUserSerializer
 
 
 class PurchaseOrderItemSerializer(serializers.ModelSerializer):
@@ -10,9 +10,22 @@ class PurchaseOrderItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'order', 'product', 'quantity']
         read_only_fields = ['id', 'price']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        request = self.context.get('request')
+        if request and request.user and not request.user.is_staff:
+            self.fields['order'].queryset = request.user.purchaseorder_set.all()    
+
+class AdminPurchaseOrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model: PurchaseOrderItem
+        fields = ['id', 'order', 'product', 'quantity']
+        read_only_fields = ['id', 'price']
+
+
 
 class PurchaseOrderSerializer(serializers.ModelSerializer):
-    creator = UserSerializer(read_only=True)
+    creator = CustomUserSerializer(read_only=True)
     items = PurchaseOrderItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 

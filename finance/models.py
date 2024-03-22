@@ -4,7 +4,7 @@ from user_panel.models import CustomUser
 
 
 class PurchaseOrder(models.Model):
-    creator = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
+    creator = models.ForeignKey(CustomUser, on_delete=models.PROTECT, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
