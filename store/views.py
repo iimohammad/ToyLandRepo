@@ -1,12 +1,12 @@
 from rest_framework import viewsets, permissions
-from .serializers import AdminCommentSerializers, ProductSerialziers, CategorySerializers, CommentSerializers, \
-    MediaSerialziers
+from .serializers import AdminCommentSerializers, ProductSerializers, CategorySerializers, CommentSerializers, \
+    MediaSerializers
 from .models import Product, Category, Comment, Media
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
-    serializer_class = ProductSerialziers
+    serializer_class = ProductSerializers
     permission_classes = [permissions.IsAdminUser]
     search_fields = ('name', 'description')
 
@@ -38,5 +38,5 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 class MediaViewSet(viewsets.ModelViewSet):
     queryset = Media.objects.all()
-    serializer_class = MediaSerialziers
+    serializer_class = MediaSerializers
     permission_classes = [permissions.IsAdminUser]
