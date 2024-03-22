@@ -3,6 +3,7 @@ from store.models import Product
 from user_panel.models import CustomUser
 from uuid import uuid4
 
+
 class wallet(models.Model):
     owner = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
@@ -62,7 +63,7 @@ class CartItem(models.Model):
     quantity = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
-         unique_together = [['cart', 'product']]
+        unique_together = [['cart', 'product']]
 
     def update_quantity(self, quantity):
         self.quantity = quantity

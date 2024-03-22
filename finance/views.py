@@ -12,14 +12,13 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
         if self.request.user.is_staff:
             return PurchaseOrder.objects.all()
         return PurchaseOrder.objects.filter(creator=self.request.user)
-    
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
 
 
 class PurchaseOrderItemViewSet(viewsets.ModelViewSet):
-    serializer_class = PurchaseOrderItemSerializer 
+    serializer_class = PurchaseOrderItemSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):

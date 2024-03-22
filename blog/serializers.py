@@ -11,6 +11,7 @@ class CategorySerialziers(serializers.ModelSerializer):
 
 class PostSerializers(serializers.ModelSerializer):
     owner = CustomUserSerializer(read_only=True)
+
     class Meta:
         model = Post
         fields = ['id', 'title', 'content', 'category', 'owner']
@@ -18,6 +19,7 @@ class PostSerializers(serializers.ModelSerializer):
 
 class CommentSerializers(serializers.ModelSerializer):
     author = CustomUserSerializer(read_only=True)
+
     class Meta:
         model = Comment
         fields = ['id', 'post', 'content', 'author']
@@ -25,10 +27,10 @@ class CommentSerializers(serializers.ModelSerializer):
 
 class AdminCommentSerializers(serializers.ModelSerializer):
     author = CustomUserSerializer(read_only=True)
+
     class Meta:
         model = Comment
         fields = ['id', 'post', 'content', 'author', 'is_active']
-
 
 
 class MediaSerializers(serializers.ModelSerializer):

@@ -11,6 +11,7 @@ class CategorySerializers(serializers.ModelSerializer):
 
 class CommentSerializers(serializers.ModelSerializer):
     author = CustomUserSerializer(read_only=True)
+
     class Meta:
         model = Comment
         fields = ('id', 'product', 'text', 'author')
@@ -18,19 +19,19 @@ class CommentSerializers(serializers.ModelSerializer):
 
 class AdminCommentSerializers(serializers.ModelSerializer):
     author = CustomUserSerializer(read_only=True)
+
     class Meta:
         model = Comment
         fields = ('id', 'product', 'text', 'author', 'is_active')
 
 
-class MediaSerialziers(serializers.ModelSerializer):
+class MediaSerializers(serializers.ModelSerializer):
     class Meta:
         model = Media
         fields = ['product', 'caption', 'media']
 
 
-
-class ProductSerialziers(serializers.ModelSerializer):
+class ProductSerializers(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'name', 'description', 'price', 'category']

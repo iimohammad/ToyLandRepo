@@ -4,6 +4,7 @@ from user_panel.models import CustomUser
 from .models import wallet, Cart, CartItem
 from user_panel.serializers import CustomUserSerializer
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
 

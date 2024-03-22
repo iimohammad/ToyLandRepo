@@ -15,8 +15,7 @@ class PurchaseOrder(models.Model):
         for item in self.items.all():
             total += item.quantity * item.price
         return total
-    
-    
+
 
 class PurchaseOrderItem(models.Model):
     order = models.ForeignKey(PurchaseOrder, on_delete=models.PROTECT, related_name='items')

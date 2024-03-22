@@ -2,8 +2,9 @@ from rest_framework import generics, viewsets
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
-from user_panel.models import  Profile
+from user_panel.models import Profile
 from .serializers import *
+
 
 class RegisterUserApi(generics.GenericAPIView):
     serializer_class = RegisterSerializer
@@ -17,8 +18,9 @@ class RegisterUserApi(generics.GenericAPIView):
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": token.key  
+            "token": token.key
         })
+
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -27,5 +29,3 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Profile.objects.filter(user=self.request.user)
-
-
