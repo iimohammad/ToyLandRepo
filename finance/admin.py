@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import PurchaseOrder, PurchaseOrderItem
 
+
 class PurchaseOrderItemInline(admin.TabularInline):
     extra = 1
     model = PurchaseOrderItem

@@ -14,7 +14,10 @@ class Post(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    owner = models.ForeignKey(CustomUser, on_delete=models.PROTECT, editable=False)
+    owner = models.ForeignKey(
+        CustomUser,
+        on_delete=models.PROTECT,
+        editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -22,7 +25,11 @@ class Post(models.Model):
 
 
 class Media(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True)
     caption = models.CharField(max_length=100)
     media = models.FileField(upload_to='media/', null=True, blank=True)
 
@@ -33,7 +40,10 @@ class Media(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
-    author = models.ForeignKey(CustomUser, on_delete=models.PROTECT, editable=False)
+    author = models.ForeignKey(
+        CustomUser,
+        on_delete=models.PROTECT,
+        editable=False)
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 

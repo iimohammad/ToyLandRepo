@@ -24,4 +24,5 @@ class PurchaseOrderItemViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return PurchaseOrderItem.objects.all()
-        return PurchaseOrderItem.objects.filter(order__creator=self.request.user)
+        return PurchaseOrderItem.objects.filter(
+            order__creator=self.request.user)

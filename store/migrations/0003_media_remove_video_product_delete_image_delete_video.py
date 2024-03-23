@@ -14,10 +14,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Media',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('video', models.FileField(upload_to='products/media/')),
                 ('caption', models.CharField(max_length=100)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='videos', to='store.product')),
+                ('product',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                   related_name='videos',
+                                   to='store.product')),
             ],
         ),
         migrations.RemoveField(

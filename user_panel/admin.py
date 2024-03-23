@@ -16,4 +16,4 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'description', 'profile_photo']   
+    list_display = ['id', 'user', 'description', 'profile_photo']

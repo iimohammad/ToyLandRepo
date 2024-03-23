@@ -30,7 +30,8 @@ class CommentViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Comment.objects.all()
-        return Comment.objects.filter(is_active=True, author=self.request.user).order_by('-pk')
+        return Comment.objects.filter(
+            is_active=True, author=self.request.user).order_by('-pk')
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

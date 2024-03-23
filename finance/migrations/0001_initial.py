@@ -18,19 +18,28 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PurchaseOrder',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('creator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('creator', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='PurchaseOrderItem',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.PositiveSmallIntegerField()),
                 ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='items', to='finance.purchaseorder')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='purchase_order_items', to='store.product')),
+                ('order',
+                 models.ForeignKey(on_delete=django.db.models.deletion.PROTECT,
+                                   related_name='items',
+                                   to='finance.purchaseorder')),
+                ('product',
+                 models.ForeignKey(on_delete=django.db.models.deletion.PROTECT,
+                                   related_name='purchase_order_items',
+                                   to='store.product')),
             ],
         ),
     ]

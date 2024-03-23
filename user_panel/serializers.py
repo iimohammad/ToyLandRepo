@@ -22,12 +22,20 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password = serializers.CharField(
+        write_only=True,
+        required=True,
+        validators=[validate_password])
     password_confirm = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'password', 'password_confirm', 'email', 'phone_number')
+        fields = (
+            'username',
+            'password',
+            'password_confirm',
+            'email',
+            'phone_number')
         extra_kwargs = {
             'phone_number': {'required': False}
         }

@@ -14,7 +14,7 @@ class PurchaseOrderItemSerializer(serializers.ModelSerializer):
         super().__init__(*args, **kwargs)
         request = self.context.get('request')
         if request and request.user and not request.user.is_staff:
-            self.fields['order'].queryset = request.user.purchaseorder_set.all()
+            self.fields['user'].queryset = request.user.profile_set.all()
 
 
 class AdminPurchaseOrderItemSerializer(serializers.ModelSerializer):

@@ -4,8 +4,14 @@ from finance.views import PurchaseOrderItemViewSet, PurchaseOrderViewSet
 
 router = DefaultRouter()
 
-router.register('PurchaseOrder', PurchaseOrderViewSet, basename='PurchaseOrder')
-router.register('PurchaseOrderItem', PurchaseOrderItemViewSet, basename='PurchaseOrderItem')
+router.register(
+    'PurchaseOrder',
+    PurchaseOrderViewSet,
+    basename='PurchaseOrder')
+router.register(
+    'PurchaseOrderItem',
+    PurchaseOrderItemViewSet,
+    basename='PurchaseOrderItem')
 
 urlpatterns = [
     path('', include(router.urls)),
